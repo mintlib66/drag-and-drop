@@ -20,19 +20,25 @@ let dragStartIndex
 
 createList()
 
+const numbers = []
+
 // 리스트 아이템 DOM 업데이트
 function createList() {
-  ;[...data].forEach((item, index) => {
-    const listItem = document.createElement('li')
-    listItem.setAttribute('data-index', index)
-    listItem.innerHTML = `
+  ;[...data]
+    .map(a => ({ value: a, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(a => a.value)
+    .forEach((item, index) => {
+      const listItem = document.createElement('li')
+      listItem.setAttribute('data-index', index)
+      listItem.innerHTML = `
         <span class="number">${index + 1}</span>
         <div class="draggable" draggable="true">
             <span class="item">${item}</span>
             <i class="fas fa-grip-lines"></i>
         </div>
         `
-    listItems.push(listItem)
-    draggable_list.appendChild(listItem)
-  })
+      listItems.push(listItem)
+      draggable_list.appendChild(listItem)
+    })
 }
