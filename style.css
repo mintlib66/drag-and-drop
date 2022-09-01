@@ -30,6 +30,9 @@ body {
   align-items: center;
   background-color: #fff;
 }
+.draggable-list li.dragging {
+  /* box-shadow: 0 0 1rem 0.5rem rgba(0, 0, 0, 0.1); */
+}
 .draggable-list li:hover {
   background-color: #ebebeb;
 }
