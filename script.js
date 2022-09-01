@@ -19,6 +19,7 @@ const listItems = []
 let dragStartIndex
 
 createList()
+check.addEventListener('click', checkOrder)
 
 const numbers = []
 
@@ -44,6 +45,7 @@ function createList() {
   addDragEvent()
 }
 
+//드래그&드롭 이벤트 처리
 function addDragEvent() {
   const draggable = document.querySelectorAll('.draggable')
   const dragListItem = document.querySelectorAll('.draggable-list li')
@@ -61,20 +63,21 @@ function addDragEvent() {
 
 function dragStart() {
   dragStartIndex = this.closest('li').getAttribute('data-index')
-  console.log('start ' + dragStartIndex)
 }
 function dragOver(e) {
+  //기본처리 막아서 drop이벤트 허용
   e.preventDefault()
 }
 function dragEnter() {
+  console.log('enter')
   this.classList.add('over')
 }
 function dragLeave() {
+  console.log('leave')
   this.classList.remove('over')
 }
 function dragDrop() {
   const dragEndIndex = this.getAttribute('data-index')
-  console.log('drop ' + dragEndIndex)
   swapItems(dragStartIndex, dragEndIndex)
 
   this.classList.remove('over')
@@ -82,9 +85,21 @@ function dragDrop() {
 function swapItems(fromIndex, toIndex) {
   const fromItem = listItems[fromIndex].querySelector('.draggable')
   const toItem = listItems[toIndex].querySelector('.draggable')
-  console.log(fromIndex + '->' + toIndex)
-  console.log(fromItem, toItem)
 
   listItems[fromIndex].appendChild(toItem)
   listItems[toIndex].appendChild(fromItem)
+}
+
+//순서 확인 처리
+function checkOrder() {
+  listItems.forEach((listItem, index) => {
+    const item = listItem.querySelector('.name').innerText
+    if (item === data[index]) {
+      listItem.classList.remove('wrong')
+      listItem.classList.add('right')
+    } else {
+      listItem.classList.remove('right')
+      listItem.classList.add('wrong')
+    }
+  })
 }
