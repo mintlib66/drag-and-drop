@@ -1,14 +1,61 @@
-ul {
-  padding: 0;
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap');
+:root {
+  --border-color: #dcdddd;
+  --background-color: #d1d5d8;
+  --text-color: #34444f;
 }
-li {
+
+* {
+  box-sizing: border-box;
+}
+body {
+  background-color: #fff;
   display: flex;
-  width: 50%;
-  padding: 0.5rem;
+  flex-direction: column;
   align-items: center;
-  border: 1px solid gray;
+  justify-content: flex-start;
+  height: 100vh;
+  margin: 0;
+  font-family: 'IBM Plex Sans KR', sans-serif;
+}
+
+.draggable-list {
+  border: 1px solid var(--border-color);
+  padding: 0;
   list-style: none;
 }
+.draggable-list li {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  background-color: #fff;
+}
+.draggable-list li:hover {
+  background-color: #ebebeb;
+}
+.draggable-list li:not(:last-of-type) {
+  border-bottom: 1px solid var(--border-color);
+}
+.draggable-list .number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background-color);
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+}
+.draggable-list .name {
+  color: var(--text-color);
+  margin-right: 1rem;
+}
+.draggable-list li.right .name {
+  color: #3ae374;
+}
+.draggable-list li.wrong .name {
+  color: #e70000;
+}
+
 .draggable {
   display: flex;
   width: 100%;
@@ -16,4 +63,20 @@ li {
 
   padding: 0 1rem;
   cursor: pointer;
+}
+
+.check-btn {
+  background-color: var(--background-color);
+  border: none;
+  color: var(--text-color);
+  font-size: 16px;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+.check-btn:active {
+  transform: scale(0.98);
+}
+.check-btn i {
+  margin-right: 0.25rem;
 }
